@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { user } from '$lib/stores';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	onMount(() => {
 		if ($user?.role !== 'admin') {

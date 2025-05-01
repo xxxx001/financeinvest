@@ -18,6 +18,13 @@
 
 	const i18n = getContext('i18n');
 
+	let financeinvest = false;
+	let lifesciences = false;
+    $: {
+       financeinvest = $page.url.pathname.includes('financeinvest');
+       lifesciences = $page.url.pathname.includes('lifesciences');
+    }
+
 	let loaded = false;
 
 	onMount(async () => {
@@ -112,6 +119,25 @@
 						{/if}
 
 						{#if $user?.role === 'admin' || $user?.permissions?.workspace?.tools}
+							{#if financeinvest}
+						    <a
+								class="min-w-fit rounded-full p-1.5 {$page.url.pathname.includes('/workspace/financeinvest')
+									? ''
+									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition"
+								href="/workspace/financeinvest"
+							>
+								{$i18n.t('ToolsFinance')}
+							</a>
+							{:else if lifesciences}
+							<a
+								class="min-w-fit rounded-full p-1.5 {$page.url.pathname.includes('/workspace/lifesciences')
+									? ''
+									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition"
+								href="/workspace/lifesciences"
+							>
+								{$i18n.t('ToolsLife')}
+							</a>
+							{:else}
 							<a
 								class="min-w-fit rounded-full p-1.5 {$page.url.pathname.includes('/workspace/tools')
 									? ''
@@ -120,6 +146,7 @@
 							>
 								{$i18n.t('Tools')}
 							</a>
+							{/if}
 						{/if}
 					</div>
 				</div>
